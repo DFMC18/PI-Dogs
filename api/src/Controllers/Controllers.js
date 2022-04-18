@@ -8,4 +8,3 @@ const getApiData = async () => {
     const infoApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key`);
 };
 
-
