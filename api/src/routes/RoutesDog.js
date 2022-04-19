@@ -1,10 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 const express = require("express");
-
+const { Dog, Temperament } = require("../db");
 const { getFullApi } = require("../controllers/Controllers");
 
-const { Dog, Temperament } = require("../db");
 
 router.get("/dogs", async (req, res) => {
   const name = req.query.name;
@@ -34,6 +33,8 @@ router.get("/dogs/:id", async (req, res) => {
       : res.status(404).send("Dog not found");
   }
 });
+
+
 
 module.exports = router;
 router.use(express.json());
