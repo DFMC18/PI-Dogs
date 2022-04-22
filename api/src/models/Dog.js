@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("dog", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
       defaultValue: DataTypes.UUIDV4,
@@ -16,35 +16,36 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
 
-    heightMax: {
+    height_max: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    heightMin: {
+    height_min: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    weightMax: {
+    weight_max: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    weightMin: {
+    weight_min: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-
-    life_span: {
-      type: DataTypes.STRING,
     },
 
     image: {
       type: DataTypes.STRING,
     },
 
-    createdInDb: {
+    life_span: {
+      type: DataTypes.STRING,
+    },
+
+    createInDb: {
+      allowNull: false,
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },

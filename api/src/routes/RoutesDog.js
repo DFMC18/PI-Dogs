@@ -4,7 +4,6 @@ const express = require("express");
 const { Dog, Temperament } = require("../db");
 const { getFullApi } = require("../controllers/Controllers");
 
-
 router.get("/dogs", async (req, res) => {
   const name = req.query.name;
   const fullApi = await getFullApi();
@@ -34,7 +33,43 @@ router.get("/dogs/:id", async (req, res) => {
   }
 });
 
+router.post("/dogs", async (req, res) => {
+  const {
+    name,
+    height_max,
+    height_min,
+    weight_max,
+    weight_min,
+    life_span,
+    image,
+    temperament,
+    createInDb,
+  } = req.body;
 
+  try {
+    const createDog = await Dog.create({
+      name,
+      height_min,
+      height_max,
+      weight_min,
+      weight_max,
+      image: image
+        ? image
+        : "https://ichef.bbci.co.uk/news/800/cpsprodpb/15665/production/_107435678_perro1.jpg",
+      life_span,
+      createInDb,
+    });
+
+    let temperamentDb = await Temperament.findAll({
+      where: { name: temperament },
+    });
+
+    createDog.addTemperament(temperamentDb);
+    res.status(200).send("Breed Created successfully");
+  } catch (error) {
+    res.send("Error: Post failed");
+  }
+});
 
 module.exports = router;
 router.use(express.json());
