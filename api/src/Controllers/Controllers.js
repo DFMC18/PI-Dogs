@@ -1,7 +1,5 @@
 const axios = require("axios");
-
 const { Dog, Temperament } = require("../db");
-
 const { API_KEY } = process.env;
 
 const getFullApi = async () => {
@@ -14,6 +12,7 @@ const getFullApi = async () => {
       name: parameters.name,
       weight: parameters.weight.metric.split("-"),
       image: parameters.image.url,
+      temperament: parameters.temperament,
     };
   });
   return showApi;
